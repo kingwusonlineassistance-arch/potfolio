@@ -1,62 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
-    exit;
-}
-
-// DB Connection
-$host = "localhost";
-$user = "root"; 
-$pass = ""; 
-$db   = "modern_app";
-
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
-
-// Fetch logged-in user
-$user_id = $_SESSION['user_id'];
-$userQuery = $conn->query("SELECT * FROM users WHERE id='$user_id'");
-$user = $userQuery->fetch_assoc();
-
-// Wallet addresses
-$usdtAddress = "TYOUR_USDT_ADDRESS"; // Replace with actual USDT address
-$trxAddress = "TYOUR_TRX_ADDRESS";   // Replace with actual TRX address
-
-// Handle deposit submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['method'])) {
-    $method = $_POST['method'];
-    $currency = $_POST['currency'];
-    $amount = floatval($_POST['amount']);
-    $network = $_POST['network'] ?? null;
-    $mobile_number = $_POST['mobile_number'] ?? null;
-    $proofFile = null;
-
-    // Handle file upload
-    if (isset($_FILES['proof']) && $_FILES['proof']['error'] === 0) {
-        $ext = pathinfo($_FILES['proof']['name'], PATHINFO_EXTENSION);
-        $filename = "proof_" . time() . "." . $ext;
-        $targetDir = "uploads/";
-        if (!is_dir($targetDir)) mkdir($targetDir, 0777, true);
-        $targetFile = $targetDir . $filename;
-        if (move_uploaded_file($_FILES['proof']['tmp_name'], $targetFile)) {
-            $proofFile = $filename;
-        }
-    }
-
-    // Insert deposit
-    $stmt = $conn->prepare("INSERT INTO user_deposits (user_id, method, amount, currency, network, mobile_number, proof) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isdssss", $user_id, $method, $amount, $currency, $network, $mobile_number, $proofFile);
-    $stmt->execute();
-    $stmt->close();
-}
-
-// Fetch user's deposit history
-$historyQuery = $conn->query("SELECT * FROM user_deposits WHERE user_id='$user_id' ORDER BY created_at DESC");
-
-// Fetch all user transactions for admin tracking
-$allTransactions = $conn->query("SELECT d.*, u.phone FROM user_deposits d JOIN users u ON d.user_id=u.id ORDER BY d.created_at DESC");
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -352,3 +293,4 @@ document.getElementById('mobile-number').addEventListener('input', function() {
 </script>
 </body>
 </html>
+
