@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recharge Select</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1c1b2f;
+      color: white;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 30px auto;
+      background-color: #25203d;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .header {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 20px 0;
+      background-color: #1c1b2f;
+      border-bottom: 1px solid #333;
+    }
+
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .menu-item img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .menu-item i {
+      font-size: 20px;
+      color: #9c4aff;
+    }
+
+    .menu-item:hover {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+    <div class="header">
+        <a href="javascript:history.back()" class="back-button">&larr; Back</a>
+
+
+<div class="container">
+  <div class="header">Recharge Select</div>
+  <ul class="menu">
+    <li class="menu-item" onclick="redirectTo('usdtpay.html')">
+      <span>
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=022" alt="TRC20-USDT">
+        TRC20-USDT
+      </span>
+      <i>&rarr;</i>
+    </li>
+    <li class="menu-item" onclick="redirectTo('trxpay.html')">
+      <span>
+        <img src="https://cryptologos.cc/logos/tron-trx-logo.png?v=022" alt="TRX">
+        TRX
+      </span>
+      <i>&rarr;</i>
+    </li>
+    <li class="menu-item" onclick="redirectTo('beb20pay.html')">
+      <span>
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=022" alt="BEP20-USDT">
+        BEP20-USDT
+      </span>
+      <i>&rarr;</i>
+    </li>
+    <li class="menu-item" onclick="redirectTo('bnbpay.html')">
+      <span>
+        <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=022" alt="BNB">
+        BNB
+      </span>
+      <i>&rarr;</i>
+    </li>
+  </ul>
+</div>
+
+<script>
+  function redirectTo(page) {
+    window.location.href = page;
+  }
+</script>
+
+</body>
+</html>
+
+
+
+
