@@ -1,379 +1,220 @@
+Conversation opened. 3 messages. All messages read.
+
+Skip to content
+Using Gmail with screen readers
+Conversations
+0% of 15 GB used
+Terms · Privacy · Program Policies
+Last account activity: 34 minutes ago
+Details
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investment Platform - Grow Your Wealth in GHS</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --dark-color: #2c3e50;
-            --light-color: #ecf0f1;
-            --danger-color: #e74c3c;
-            --warning-color: #f39c12;
-            --success-color: #27ae60;
-            --gradient-start: #3a7bd5;
-            --gradient-end: #00d2ff;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 0 0 20px 20px;
-        }
-        /* Action Buttons Card */
-        .action-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-            margin: 1rem;
-        }
-        .action-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-        .action-buttons a {
-            flex: 1 1 calc(50% - 0.5rem);
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            padding: 0.75rem;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .action-buttons a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .btn-deposit { background-color: var(--success-color); }
-        .btn-withdraw { background-color: var(--danger-color); }
-        .btn-mine { background-color: var(--warning-color); color: black; }
-        .btn-history { background-color: var(--primary-color); }
-        .btn-reward { background-color: #9b59b6; }
-        .btn-login { background-color: var(--primary-color); }
-        .btn-register { background-color: var(--secondary-color); }
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x900/?investment');
-            background-size: cover;
-            color: white;
-            text-align: center;
-            padding: 4rem 1rem;
-            border-radius: 0 0 20px 20px;
-        }
-        /* Balance Section */
-        .balance-section {
-            text-align: center;
-            padding: 1rem;
-            background-color: var(--light-color);
-            margin: 1rem auto;
-            border-radius: 10px;
-            max-width: 300px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Investment Plans */
-        .plans-section {
-            padding: 2rem;
-        }
-        .plan-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-top: 4px solid var(--primary-color);
-        }
-        .plan-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .plan-card h3 {
-            color: var(--dark-color);
-            margin-bottom: 1rem;
-        }
-        .plan-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--success-color);
-            margin-bottom: 0.5rem;
-        }
-        .plan-income {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        .invest-btn {
-            background-color: var(--success-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .invest-btn:hover {
-            background-color: #218838;
-        }
-        /* Modal */
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        }
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KINGWUS Data Bundle</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- Paystack -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"></script>
+
+  <style>
+    body.gradient-bg {
+      background: linear-gradient(135deg, #1a202c, #2d3748);
+    }
+
+    #loader {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spin {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #38a169;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .pulse-icon {
+      animation: pulse 2s infinite;
+      transform-origin: center;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.15); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <h1><i class="fas fa-chart-line"></i> Investment Platform</h1>
-        <p>Grow Your Wealth in GHS</p>
-    </header>
-    <!-- Action Buttons Card -->
-    <div class="action-card">
-        <div class="action-buttons">
-            <a href="deposit.html" class="btn btn-deposit"><i class="fas fa-money-bill-wave"></i> Deposit</a>
-            <a href="withdraw.html" class="btn btn-withdraw"><i class="fas fa-hand-holding-usd"></i> Withdraw</a>
-            <a href="mine.html" class="btn btn-mine"><i class="fas fa-coins"></i> Mine</a>
-            <a href="history.html" class="btn btn-history"><i class="fas fa-history"></i> History</a>
-            <a href="reward.html" class="btn btn-reward"><i class="fas fa-gift"></i> Reward</a>
-            <a href="login.html" class="btn btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
-            <a href="register.html" class="btn btn-register"><i class="fas fa-user-plus"></i> Register</a>
-        </div>
-    </div>
-    <!-- Hero Section -->
-    <section class="hero">
-        <h2>Start Investing in GHS</h2>
-        <p>Convert to USDT (BEP20) and grow your wealth with our flexible plans.</p>
-        <a href="#plans" class="btn btn-warning btn-lg"><i class="fas fa-eye"></i> View Plans</a>
-    </section>
-    <!-- Balance Section -->
-    <div class="balance-section">
-        <h3>Your Balance: <span id="userBalance">0 GHS</span></h3>
-    </div>
-    <!-- Investment Plans -->
-    <section class="plans-section" id="plans">
-        <h2 class="text-center mb-4"><i class="fas fa-box-open"></i> Investment Plans (GHS)</h2>
-        <div class="container">
-            <div class="row">
-                <!-- VIP1 Plan -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="plan-card">
-                        <h3><i class="fas fa-crown"></i> VIP1</h3>
-                        <div class="plan-price">50 GHS</div>
-                        <div class="plan-income">Daily: 5 GHS | Monthly: 166 GHS | Annual: 2001 GHS</div>
-                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP1" data-amount="50">Invest</button>
-                    </div>
-                </div>
-                <!-- VIP2 Plan -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="plan-card">
-                        <h3><i class="fas fa-gem"></i> VIP2</h3>
-                        <div class="plan-price">150 GHS</div>
-                        <div class="plan-income">Daily: 16 GHS | Monthly: 500 GHS | Annual: 6001 GHS</div>
-                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP2" data-amount="150">Invest</button>
-                    </div>
-                </div>
-                <!-- VIP3 Plan -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="plan-card">
-                        <h3><i class="fas fa-diamond"></i> VIP3</h3>
-                        <div class="plan-price">400 GHS</div>
-                        <div class="plan-income">Daily: 44 GHS | Monthly: 1333 GHS | Annual: 15998 GHS</div>
-                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP3" data-amount="400">Invest</button>
-                    </div>
-                </div>
-                <!-- VIP4 Plan -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="plan-card">
-                        <h3><i class="fas fa-trophy"></i> VIP4</h3>
-                        <div class="plan-price">800 GHS</div>
-                        <div class="plan-income">Daily: 88 GHS | Monthly: 2666 GHS | Annual: 32000 GHS</div>
-                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP4" data-amount="800">Invest</button>
-                    </div>
-                </div>
-                <!-- VIP5 Plan -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="plan-card">
-                        <h3><i class="fas fa-award"></i> VIP5</h3>
-                        <div class="plan-price">1500 GHS</div>
-                        <div class="plan-income">Daily: 187 GHS | Monthly: 5625 GHS | Annual: 67500 GHS</div>
-                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP5" data-amount="1500">Invest</button>
-                    </div>
-                </div>
-                <!-- VIP6 Plan -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="plan-card">
-                        <h3><i class="fas fa-medal"></i> VIP6</h3>
-                        <div class="plan-price">3000 GHS</div>
-                        <div class="plan-income">Daily: 375 GHS | Monthly: 11250 GHS | Annual: 135000 GHS</div>
-                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP6" data-amount="3000">Invest</button>
-                    </div>
-                </div>
-                <!-- VIP7 Plan -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="plan-card">
-                        <h3><i class="fas fa-certificate"></i> VIP7</h3>
-                        <div class="plan-price">5000 GHS</div>
-                        <div class="plan-income">Daily: 625 GHS | Monthly: 18750 GHS | Annual: 225000 GHS</div>
-                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP7" data-amount="5000">Invest</button>
-                    </div>
-                </div>
-                <!-- VIP8 Plan -->
-                <div class="col-md-6 col-lg-4">
-                    <div class="plan-card">
-                        <h3><i class="fas fa-chess-king"></i> VIP8</h3>
-                        <div class="plan-price">10000 GHS</div>
-                        <div class="plan-income">Daily: 1428 GHS | Monthly: 42857 GHS | Annual: 514285 GHS</div>
-                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP8" data-amount="10000">Invest</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Invest Modal -->
-    <div class="modal fade" id="investModal" tabindex="-1" aria-labelledby="investModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="investModalLabel">Investment Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Plan:</strong> <span id="modalPlan"></span></p>
-                    <p><strong>Amount:</strong> <span id="modalAmount"></span> GHS</p>
-                    <p><strong>Daily Income:</strong> <span id="modalDaily"></span> GHS</p>
-                    <p><strong>Monthly Income:</strong> <span id="modalMonthly"></span> GHS</p>
-                    <p><strong>Annual Income:</strong> <span id="modalAnnual"></span> GHS</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" id="confirmInvest">Invest Now</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Investment Platform. All rights reserved.</p>
-    </footer>
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Fetch user balance on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('index.php?action=getBalance')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('userBalance').textContent = `${data.balance} GHS`;
-                });
-        });
 
-        // Modal Logic
-        const investModal = document.getElementById('investModal');
-        investModal.addEventListener('show.bs.modal', (event) => {
-            const button = event.relatedTarget;
-            const plan = button.getAttribute('data-plan');
-            const amount = button.getAttribute('data-amount');
-            const modalPlan = investModal.querySelector('#modalPlan');
-            const modalAmount = investModal.querySelector('#modalAmount');
-            const modalDaily = investModal.querySelector('#modalDaily');
-            const modalMonthly = investModal.querySelector('#modalMonthly');
-            const modalAnnual = investModal.querySelector('#modalAnnual');
-            // Set modal content
-            modalPlan.textContent = plan;
-            modalAmount.textContent = amount;
-            // Calculate incomes (simplified logic)
-            let daily, monthly, annual;
-            switch (plan) {
-                case 'VIP1':
-                    daily = 5; monthly = 166; annual = 2001;
-                    break;
-                case 'VIP2':
-                    daily = 16; monthly = 500; annual = 6001;
-                    break;
-                case 'VIP3':
-                    daily = 44; monthly = 1333; annual = 15998;
-                    break;
-                case 'VIP4':
-                    daily = 88; monthly = 2666; annual = 32000;
-                    break;
-                case 'VIP5':
-                    daily = 187; monthly = 5625; annual = 67500;
-                    break;
-                case 'VIP6':
-                    daily = 375; monthly = 11250; annual = 135000;
-                    break;
-                case 'VIP7':
-                    daily = 625; monthly = 18750; annual = 225000;
-                    break;
-                case 'VIP8':
-                    daily = 1428; monthly = 42857; annual = 514285;
-                    break;
-                default:
-                    daily = 0; monthly = 0; annual = 0;
-            }
-            modalDaily.textContent = daily;
-            modalMonthly.textContent = monthly;
-            modalAnnual.textContent = annual;
-        });
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
 
-        // Confirm Invest
-        document.getElementById('confirmInvest').addEventListener('click', () => {
-            const plan = document.getElementById('modalPlan').textContent;
-            const amount = parseInt(document.getElementById('modalAmount').textContent);
-            fetch('index.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `action=invest&plan=${plan}&amount=${amount}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(`Successfully invested in ${plan} plan! Redirecting to packs page...`);
-                    window.location.href = `packs.html?plan=${plan}&amount=${amount}`;
-                } else {
-                    alert(data.message || 'Investment failed!');
-                }
-            });
-        });
-    </script>
+<!-- Loader -->
+<div id="loader">
+  <div class="spin"></div>
+</div>
+
+<!-- Main -->
+<main class="w-full max-w-3xl glass text-white p-6 sm:p-10 rounded-xl shadow-2xl">
+  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 text-blue-300">👑 KINGWUS Data Bundle</h1>
+
+  <form id="bundleForm" class="space-y-5">
+    <div>
+      <label class="block mb-2 text-lg font-semibold">Select Network:</label>
+      <div class="flex flex-wrap justify-center gap-3 mb-4" id="networkButtons"></div>
+    </div>
+
+    <div id="bundleOptions" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4"></div>
+
+    <div id="summary" class="mb-4 text-center text-white font-medium text-lg"></div>
+
+    <div id="receiverFields" class="space-y-5 hidden">
+      <div>
+        <label class="block text-sm font-medium mb-1">Receiver's Number (e.g. 23324XXXXXX)</label>
+        <input type="tel" id="phone" required pattern="233[0-9]{9}" placeholder="23324XXXXXX"
+          class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Your Phone Number</label>
+        <input type="tel" id="senderPhone" required placeholder="233XXYYYYYYY"
+          class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Your Email Address</label>
+        <input type="email" id="email" required placeholder="you@example.com"
+          class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+      </div>
+    </div>
+
+    <input type="hidden" name="network" id="network" required />
+    <input type="hidden" name="amount" id="amount" required />
+    <input type="hidden" name="bundleSize" id="bundleSize" />
+
+    <button type="button" onclick="payNow()"
+      class="mt-6 w-full bg-green-500 text-white py-3 rounded-md text-lg font-semibold hover:bg-green-600 transition">
+      💳 Pay Now
+    </button>
+  </form>
+</main>
+
+<script>
+const allBundles = {
+  "MTN": { 6: '1GB', 11: '2GB', 15: '3GB', 20: '4GB', 25: '5GB', 30: '6GB', 42: '8GB', 45: '10GB', 69: '15GB', 85: '20GB', 110: '25GB', 132: '30GB', 164: '40GB', 202: '50GB' },
+  "Telecel": { 43: '10GB', 63: '15GB', 80: '20GB', 100: '25GB', 117: '30GB', 152: '40GB', 189: '50GB' },
+  "Tigo": { 6: '1GB', 12: '2GB', 15: '3GB', 19: '4GB', 24: '5GB', 27: '6GB', 32: '7GB', 43: '10GB', 63: '15GB', 82: '20GB', 102: '25GB', 122: '30GB', 162: '40GB', 198: '50GB' }
+};
+
+let selectedNetwork = "", selectedAmount = 0, bundleSize = "";
+
+window.addEventListener("load", () => {
+  document.getElementById("loader").style.display = "none";
+  renderNetworks();
+});
+
+function renderNetworks() {
+  const container = document.getElementById("networkButtons");
+  container.innerHTML = '';
+  for (let net in allBundles) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "networkBtn px-4 py-2 min-w-[90px] text-white rounded-md hover:opacity-90 transition";
+    btn.style.backgroundColor = net === 'MTN' ? '#fbbf24' : (net === 'Telecel' ? '#ef4444' : '#3b82f6');
+    btn.textContent = net;
+    btn.onclick = () => setNetwork(net, btn);
+    container.appendChild(btn);
+  }
+}
+
+function setNetwork(net, btn) {
+  selectedNetwork = net;
+  document.getElementById("network").value = net;
+
+  document.querySelectorAll(".networkBtn").forEach(b => b.classList.remove("ring", "ring-2", "ring-offset-2"));
+  btn.classList.add("ring", "ring-2", "ring-offset-2", "ring-white");
+
+  const optionsDiv = document.getElementById("bundleOptions");
+  optionsDiv.innerHTML = "";
+  for (let price in allBundles[net]) {
+    const size = allBundles[net][price];
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "amountBtn px-3 py-2 border border-white text-white rounded-md hover:bg-white/10 text-sm";
+    btn.innerHTML = `GHS ${price}<br /><span class="text-xs text-white/70">${size}</span>`;
+    btn.onclick = () => selectAmount(price, size, btn);
+    optionsDiv.appendChild(btn);
+  }
+
+  resetSelection();
+}
+
+function resetSelection() {
+  selectedAmount = 0;
+  bundleSize = "";
+  document.getElementById("amount").value = "";
+  document.getElementById("bundleSize").value = "";
+  document.getElementById("summary").innerHTML = "";
+  document.getElementById("receiverFields").classList.add("hidden");
+}
+
+function selectAmount(amount, size, btn) {
+  selectedAmount = amount;
+  bundleSize = size;
+  document.getElementById("amount").value = amount;
+  document.getElementById("bundleSize").value = size;
+
+  document.querySelectorAll(".amountBtn").forEach(b => b.classList.remove("bg-green-500", "ring", "ring-white"));
+  btn.classList.add("bg-green-500", "ring", "ring-white");
+
+  const safeHTML = DOMPurify.sanitize(`📦 You'll receive <strong>${size}</strong> for <strong>GHS ${amount}</strong>`);
+  document.getElementById("summary").innerHTML = safeHTML;
+  document.getElementById("receiverFields").classList.remove("hidden");
+}
+</script>
+
+<!-- Support Button -->
+<a href="support.php" target="_blank" 
+   class="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 text-sm sm:text-base transition-all duration-300">
+  <i class="fas fa-headset pulse-icon"></i> Support
+</a>
+
+<script src="paystack.js"></script>
 </body>
 </html>
+
+
+index.php
+Displaying index.php.
