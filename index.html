@@ -4,26 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KINGWUS Data Bundle</title>
-
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
   <!-- Paystack -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
-
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <!-- DOMPurify -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"></script>
-
   <style>
     body.gradient-bg {
       background: linear-gradient(135deg, #1a202c, #2d3748);
     }
-
+    body.dark {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
     #loader {
       display: flex;
       position: fixed;
@@ -36,7 +33,6 @@
       align-items: center;
       justify-content: center;
     }
-
     .spin {
       border: 4px solid #f3f3f3;
       border-top: 4px solid #38a169;
@@ -45,166 +41,262 @@
       height: 40px;
       animation: spin 1s linear infinite;
     }
-
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-
     .glass {
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
-
     .pulse-icon {
       animation: pulse 2s infinite;
       transform-origin: center;
     }
-
     @keyframes pulse {
       0% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.15); opacity: 0.7; }
       100% { transform: scale(1); opacity: 1; }
     }
+    .skeleton {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      animation: skeleton-pulse 1.5s infinite ease-in-out;
+    }
+    @keyframes skeleton-pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+    .slider {
+      -webkit-appearance: none;
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #38a169;
+      cursor: pointer;
+    }
   </style>
 </head>
-
-<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
-
-<!-- Loader -->
-<div id="loader">
-  <div class="spin"></div>
-</div>
-
-<!-- Main -->
-<main class="w-full max-w-3xl glass text-white p-6 sm:p-10 rounded-xl shadow-2xl">
-  <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 text-blue-300">👑 KINGWUS Data Bundle</h1>
-
-  <form id="bundleForm" class="space-y-5">
-    <div>
-      <label class="block mb-2 text-lg font-semibold">Select Network:</label>
-      <div class="flex flex-wrap justify-center gap-3 mb-4" id="networkButtons"></div>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4 dark">
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spin"></div>
+  </div>
+  <!-- Main -->
+  <main class="w-full max-w-3xl glass text-white p-6 sm:p-10 rounded-xl shadow-2xl">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl sm:text-4xl font-bold text-blue-300">👑 KINGWUS Data Bundle</h1>
+      <button onclick="toggleTheme()" class="p-2 rounded-full bg-white/10 hover:bg-white/20">
+        <i id="theme-icon" class="fas fa-moon text-white"></i>
+      </button>
     </div>
-
-    <div id="bundleOptions" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4"></div>
-
-    <div id="summary" class="mb-4 text-center text-white font-medium text-lg"></div>
-
-    <div id="receiverFields" class="space-y-5 hidden">
+    <form id="bundleForm" class="space-y-5">
+      <!-- Network Selection -->
       <div>
-        <label class="block text-sm font-medium mb-1">Receiver's Number (e.g. 23324XXXXXX)</label>
-        <input type="tel" id="phone" required pattern="233[0-9]{9}" placeholder="23324XXXXXX"
-          class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+        <label class="block mb-2 text-lg font-semibold">Select Network:</label>
+        <div class="flex flex-wrap justify-center gap-3 mb-4" id="networkButtons">
+          <!-- Skeleton loaders for networks -->
+          <div class="skeleton h-10 w-20 rounded-md"></div>
+          <div class="skeleton h-10 w-20 rounded-md"></div>
+          <div class="skeleton h-10 w-20 rounded-md"></div>
+        </div>
       </div>
-
-      <div>
-        <label class="block text-sm font-medium mb-1">Your Phone Number</label>
-        <input type="tel" id="senderPhone" required placeholder="233XXYYYYYYY"
-          class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+      <!-- Bundle Options -->
+      <div id="bundleOptions" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+        <!-- Skeleton loaders for bundles -->
+        <div class="skeleton h-16 w-full rounded-md"></div>
+        <div class="skeleton h-16 w-full rounded-md"></div>
+        <div class="skeleton h-16 w-full rounded-md"></div>
       </div>
-
-      <div>
-        <label class="block text-sm font-medium mb-1">Your Email Address</label>
-        <input type="email" id="email" required placeholder="you@example.com"
-          class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+      <!-- Interactive Slider -->
+      <div class="mb-4">
+        <label class="block mb-2 text-lg font-semibold">Select Data Size:</label>
+        <input type="range" min="1" max="50" value="1" class="slider w-full" id="bundleSlider">
+        <p class="text-center mt-2" id="sliderValue">1GB</p>
       </div>
-    </div>
-
-    <input type="hidden" name="network" id="network" required />
-    <input type="hidden" name="amount" id="amount" required />
-    <input type="hidden" name="bundleSize" id="bundleSize" />
-
-    <button type="button" onclick="payNow()"
-      class="mt-6 w-full bg-green-500 text-white py-3 rounded-md text-lg font-semibold hover:bg-green-600 transition">
-      💳 Pay Now
-    </button>
-  </form>
-</main>
-
-<script>
-const allBundles = {
-  "MTN": { 6: '1GB', 11: '2GB', 15: '3GB', 20: '4GB', 25: '5GB', 30: '6GB', 42: '8GB', 45: '10GB', 69: '15GB', 85: '20GB', 110: '25GB', 132: '30GB', 164: '40GB', 202: '50GB' },
-  "Telecel": { 43: '10GB', 63: '15GB', 80: '20GB', 100: '25GB', 117: '30GB', 152: '40GB', 189: '50GB' },
-  "Tigo": { 6: '1GB', 12: '2GB', 15: '3GB', 19: '4GB', 24: '5GB', 27: '6GB', 32: '7GB', 43: '10GB', 63: '15GB', 82: '20GB', 102: '25GB', 122: '30GB', 162: '40GB', 198: '50GB' }
-};
-
-let selectedNetwork = "", selectedAmount = 0, bundleSize = "";
-
-window.addEventListener("load", () => {
-  document.getElementById("loader").style.display = "none";
-  renderNetworks();
-});
-
-function renderNetworks() {
-  const container = document.getElementById("networkButtons");
-  container.innerHTML = '';
-  for (let net in allBundles) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "networkBtn px-4 py-2 min-w-[90px] text-white rounded-md hover:opacity-90 transition";
-    btn.style.backgroundColor = net === 'MTN' ? '#fbbf24' : (net === 'Telecel' ? '#ef4444' : '#3b82f6');
-    btn.textContent = net;
-    btn.onclick = () => setNetwork(net, btn);
-    container.appendChild(btn);
-  }
-}
-
-function setNetwork(net, btn) {
-  selectedNetwork = net;
-  document.getElementById("network").value = net;
-
-  document.querySelectorAll(".networkBtn").forEach(b => b.classList.remove("ring", "ring-2", "ring-offset-2"));
-  btn.classList.add("ring", "ring-2", "ring-offset-2", "ring-white");
-
-  const optionsDiv = document.getElementById("bundleOptions");
-  optionsDiv.innerHTML = "";
-  for (let price in allBundles[net]) {
-    const size = allBundles[net][price];
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "amountBtn px-3 py-2 border border-white text-white rounded-md hover:bg-white/10 text-sm";
-    btn.innerHTML = `GHS ${price}<br /><span class="text-xs text-white/70">${size}</span>`;
-    btn.onclick = () => selectAmount(price, size, btn);
-    optionsDiv.appendChild(btn);
-  }
-
-  resetSelection();
-}
-
-function resetSelection() {
-  selectedAmount = 0;
-  bundleSize = "";
-  document.getElementById("amount").value = "";
-  document.getElementById("bundleSize").value = "";
-  document.getElementById("summary").innerHTML = "";
-  document.getElementById("receiverFields").classList.add("hidden");
-}
-
-function selectAmount(amount, size, btn) {
-  selectedAmount = amount;
-  bundleSize = size;
-  document.getElementById("amount").value = amount;
-  document.getElementById("bundleSize").value = size;
-
-  document.querySelectorAll(".amountBtn").forEach(b => b.classList.remove("bg-green-500", "ring", "ring-white"));
-  btn.classList.add("bg-green-500", "ring", "ring-white");
-
-  const safeHTML = DOMPurify.sanitize(`📦 You'll receive <strong>${size}</strong> for <strong>GHS ${amount}</strong>`);
-  document.getElementById("summary").innerHTML = safeHTML;
-  document.getElementById("receiverFields").classList.remove("hidden");
-}
-</script>
-
-<!-- Support Button -->
-<a href="support.html" target="_blank" 
-   class="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 text-sm sm:text-base transition-all duration-300">
-  <i class="fas fa-headset pulse-icon"></i> Support
-</a>
-
-<script src="paystack.js"></script>
+      <!-- Summary -->
+      <div id="summary" class="mb-4 text-center text-white font-medium text-lg skeleton h-8 w-full rounded-md"></div>
+      <!-- Receiver Fields -->
+      <div id="receiverFields" class="space-y-5 hidden">
+        <div>
+          <label class="block text-sm font-medium mb-1">Receiver's Number (e.g. 23324XXXXXX)</label>
+          <input type="tel" id="phone" required pattern="233[0-9]{9}" placeholder="23324XXXXXX"
+            class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+          <p id="phone-error" class="text-red-400 text-xs mt-1 hidden">Invalid phone number</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Your Phone Number</label>
+          <input type="tel" id="senderPhone" required placeholder="233XXYYYYYYY"
+            class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Your Email Address</label>
+          <input type="email" id="email" required placeholder="you@example.com"
+            class="w-full px-4 py-2 rounded-md bg-white/10 text-white border border-white focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-white/60" />
+        </div>
+      </div>
+      <!-- Hidden Inputs -->
+      <input type="hidden" name="network" id="network" required />
+      <input type="hidden" name="amount" id="amount" required />
+      <input type="hidden" name="bundleSize" id="bundleSize" />
+      <!-- Pay Button -->
+      <button type="button" onclick="payNow()"
+        class="mt-6 w-full bg-green-500 text-white py-3 rounded-md text-lg font-semibold hover:bg-green-600 transition">
+        💳 Pay Now
+      </button>
+    </form>
+  </main>
+  <!-- Support Button -->
+  <a href="support.html" target="_blank"
+     class="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 text-sm sm:text-base transition-all duration-300">
+    <i class="fas fa-headset pulse-icon"></i> Support
+  </a>
+  <script>
+    // Data
+    const allBundles = {
+      "MTN": { 6: '1GB', 11: '2GB', 15: '3GB', 20: '4GB', 25: '5GB', 30: '6GB', 42: '8GB', 45: '10GB', 69: '15GB', 85: '20GB', 110: '25GB', 132: '30GB', 164: '40GB', 202: '50GB' },
+      "Telecel": { 43: '10GB', 63: '15GB', 80: '20GB', 100: '25GB', 117: '30GB', 152: '40GB', 189: '50GB' },
+      "Tigo": { 6: '1GB', 12: '2GB', 15: '3GB', 19: '4GB', 24: '5GB', 27: '6GB', 32: '7GB', 43: '10GB', 63: '15GB', 82: '20GB', 102: '25GB', 122: '30GB', 162: '40GB', 198: '50GB' }
+    };
+    // State
+    let selectedNetwork = "", selectedAmount = 0, bundleSize = "";
+    // DOM Ready
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        renderNetworks();
+      }, 1000);
+    });
+    // Toggle Theme
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+      const icon = document.getElementById("theme-icon");
+      icon.className = document.body.classList.contains("dark") ? "fas fa-sun text-white" : "fas fa-moon text-white";
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    }
+    // Render Networks
+    function renderNetworks() {
+      const container = document.getElementById("networkButtons");
+      container.innerHTML = '';
+      for (let net in allBundles) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "networkBtn px-4 py-2 min-w-[90px] text-white rounded-md hover:opacity-90 transition";
+        btn.style.backgroundColor = net === 'MTN' ? '#fbbf24' : (net === 'Telecel' ? '#ef4444' : '#3b82f6');
+        btn.textContent = net;
+        btn.onclick = () => setNetwork(net, btn);
+        container.appendChild(btn);
+      }
+      // Initialize slider
+      document.getElementById("bundleSlider").addEventListener("input", (e) => {
+        const value = e.target.value;
+        document.getElementById("sliderValue").textContent = `${value}GB`;
+      });
+    }
+    // Set Network
+    function setNetwork(net, btn) {
+      selectedNetwork = net;
+      document.getElementById("network").value = net;
+      document.querySelectorAll(".networkBtn").forEach(b => b.classList.remove("ring", "ring-2", "ring-offset-2"));
+      btn.classList.add("ring", "ring-2", "ring-offset-2", "ring-white");
+      renderBundleOptions(net);
+    }
+    // Render Bundle Options
+    function renderBundleOptions(net) {
+      const optionsDiv = document.getElementById("bundleOptions");
+      optionsDiv.innerHTML = "";
+      for (let price in allBundles[net]) {
+        const size = allBundles[net][price];
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "amountBtn px-3 py-2 border border-white text-white rounded-md hover:bg-white/10 text-sm";
+        btn.innerHTML = `GHS ${price}<br /><span class="text-xs text-white/70">${size}</span>`;
+        btn.onclick = () => selectAmount(price, size, btn);
+        optionsDiv.appendChild(btn);
+      }
+      resetSelection();
+    }
+    // Reset Selection
+    function resetSelection() {
+      selectedAmount = 0;
+      bundleSize = "";
+      document.getElementById("amount").value = "";
+      document.getElementById("bundleSize").value = "";
+      document.getElementById("summary").innerHTML = "";
+      document.getElementById("receiverFields").classList.add("hidden");
+    }
+    // Select Amount
+    function selectAmount(amount, size, btn) {
+      selectedAmount = amount;
+      bundleSize = size;
+      document.getElementById("amount").value = amount;
+      document.getElementById("bundleSize").value = size;
+      document.querySelectorAll(".amountBtn").forEach(b => b.classList.remove("bg-green-500", "ring", "ring-white"));
+      btn.classList.add("bg-green-500", "ring", "ring-white");
+      const safeHTML = DOMPurify.sanitize(`📦 You'll receive <strong>${size}</strong> for <strong>GHS ${amount}</strong>`);
+      document.getElementById("summary").innerHTML = safeHTML;
+      document.getElementById("receiverFields").classList.remove("hidden");
+    }
+    // Pay Now
+    function payNow() {
+      const phone = document.getElementById("phone").value;
+      const senderPhone = document.getElementById("senderPhone").value;
+      const email = document.getElementById("email").value;
+      // Validate inputs
+      if (!/^233[0-9]{9}$/.test(phone)) {
+        document.getElementById("phone-error").classList.remove("hidden");
+        return;
+      }
+      // Paystack integration
+      const handler = PaystackPop.setup({
+        key: 'YOUR_PAYSTACK_PUBLIC_KEY',
+        email: email,
+        amount: selectedAmount * 100,
+        currency: 'GHS',
+        ref: `KW-${Math.floor(Math.random() * 1000000000 + 1)}`,
+        metadata: {
+          network: selectedNetwork,
+          bundleSize: bundleSize,
+          receiverPhone: phone,
+          senderPhone: senderPhone,
+        },
+        callback: function(response) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Payment Successful!',
+            text: `Your ${bundleSize} bundle for ${phone} has been processed.`,
+          });
+        },
+        onClose: function() {
+          Swal.fire({
+            icon: 'error',
+            title: 'Payment Cancelled',
+            text: 'You can retry the payment.',
+          });
+        }
+      });
+      handler.openIframe();
+    }
+    // Real-time validation
+    document.getElementById("phone").addEventListener("input", (e) => {
+      const phone = e.target.value;
+      if (!/^233[0-9]{9}$/.test(phone)) {
+        e.target.classList.add("border-red-500");
+        document.getElementById("phone-error").classList.remove("hidden");
+      } else {
+        e.target.classList.remove("border-red-500");
+        document.getElementById("phone-error").classList.add("hidden");
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-
