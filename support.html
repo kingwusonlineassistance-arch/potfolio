@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support - KINGWUS</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- Chatway Widget -->
+  <script id="chatway" async="true" src="https://cdn.chatway.app/widget.js?id=OzZgnsLX3AMT"></script>
+
+  <style>
+    body.gradient-bg {
+      background: linear-gradient(to right, #1a202c, #2d3748);
+    }
+
+    .clock {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="gradient-bg min-h-screen flex flex-col items-center justify-center p-6">
+
+  <!-- Clock and Header -->
+  <div class="mb-6 text-center">
+    <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2">📞 KINGWUS Support</h1>
+    <p class="clock" id="clock">--:--:--</p>
+    <p class="text-gray-300 mt-2 text-sm">Current time in Ghana (GMT)</p>
+
+    <!-- Support Hours -->
+    <div class="mt-4 text-white text-sm sm:text-base">
+      <p class="font-semibold">📅 Support Hours:</p>
+      <p>Monday – Friday: <span class="text-green-300">7:00 AM – 9:00 PM</span></p>
+      <p>Saturday: <span class="text-yellow-300">7:00 AM – 4:00 PM</span></p>
+      <p>Sunday: <span class="text-red-300">Closed</span></p>
+    </div>
+
+    <!-- Dynamic Status -->
+    <div id="supportStatus" class="mt-4 text-lg font-semibold"></div>
+  </div>
+
+  <!-- Info Message -->
+  <div class="max-w-xl w-full bg-white/10 text-white backdrop-blur-sm p-6 rounded-lg shadow-lg text-center">
+    <p class="text-lg sm:text-xl mb-4">
+      👋 Need help? Our support team is here for you.
+    </p>
+    <p class="text-sm text-gray-200">
+      Use the chat widget on the bottom-right to talk to us instantly!
+    </p>
+  </div>
+
+  <!-- Optional Back Button -->
+  <a href="index.php" 
+     class="mt-8 inline-block text-sm text-blue-300 hover:text-white hover:underline transition">
+    ← Back to Home
+  </a>
+
+  <!-- Clock & Support Status Script -->
+  <script>
+    function getGhanaTime() {
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Africa/Accra',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+
+      const parts = formatter.formatToParts(new Date());
+      const timeObj = {};
+      parts.forEach(part => {
+        if (part.type !== 'literal') {
+          timeObj[part.type] = parseInt(part.value, 10);
+        }
+      });
+
+      const date = new Date();
+      const ghanaTime = new Date(Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        timeObj.hour,
+        timeObj.minute,
+        timeObj.second
+      ));
+
+      return ghanaTime;
+    }
+
+    function updateClock() {
+      const now = getGhanaTime();
+      const h = String(now.getUTCHours()).padStart(2, '0');
+      const m = String(now.getUTCMinutes()).padStart(2, '0');
+      const s = String(now.getUTCSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+    }
+
+    function checkSupportStatus() {
+      const now = getGhanaTime();
+      const day = now.getUTCDay(); // 0 = Sunday
+      const hour = now.getUTCHours();
+      const minute = now.getUTCMinutes();
+
+      let isOpen = false;
+
+      if (day >= 1 && day <= 5) {
+        // Monday to Friday: 7:00 AM – 9:00 PM
+        isOpen = hour >= 7 && (hour < 21 || (hour === 21 && minute === 0));
+      } else if (day === 6) {
+        // Saturday: 7:00 AM – 4:00 PM
+        isOpen = hour >= 7 && (hour < 16 || (hour === 16 && minute === 0));
+      }
+
+      const statusEl = document.getElementById("supportStatus");
+      if (isOpen) {
+        statusEl.textContent = "✅ Support is currently OPEN";
+        statusEl.className = "text-green-400 mt-4 text-lg font-semibold";
+      } else {
+        statusEl.textContent = "❌ Support is currently CLOSED";
+        statusEl.className = "text-red-400 mt-4 text-lg font-semibold";
+      }
+    }
+
+    // Update every second
+    setInterval(() => {
+      updateClock();
+      checkSupportStatus();
+    }, 1000);
+
+    // Initial run
+    updateClock();
+    checkSupportStatus();
+  </script>
+
+</body>
+</html>
