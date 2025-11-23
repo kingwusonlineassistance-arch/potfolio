@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Platform - Grow Your Wealth in GHS</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --success-color: #27ae60;
+            --gradient-start: #3a7bd5;
+            --gradient-end: #00d2ff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 20px 20px;
+        }
+        /* Action Buttons Card */
+        .action-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            margin: 1rem;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .action-buttons a {
+            flex: 1 1 calc(50% - 0.5rem);
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .action-buttons a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-deposit { background-color: var(--success-color); }
+        .btn-withdraw { background-color: var(--danger-color); }
+        .btn-mine { background-color: var(--warning-color); color: black; }
+        .btn-history { background-color: var(--primary-color); }
+        .btn-reward { background-color: #9b59b6; }
+        .btn-login { background-color: var(--primary-color); }
+        .btn-register { background-color: var(--secondary-color); }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x900/?investment');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+            border-radius: 0 0 20px 20px;
+        }
+        /* Balance Section */
+        .balance-section {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--light-color);
+            margin: 1rem auto;
+            border-radius: 10px;
+            max-width: 300px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Investment Plans */
+        .plans-section {
+            padding: 2rem;
+        }
+        .plan-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--primary-color);
+        }
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .plan-card h3 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        .plan-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+        }
+        .plan-income {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .invest-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .invest-btn:hover {
+            background-color: #218838;
+        }
+        /* Modal */
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1><i class="fas fa-chart-line"></i> Investment Platform</h1>
+        <p>Grow Your Wealth in GHS</p>
+    </header>
+    <!-- Action Buttons Card -->
+    <div class="action-card">
+        <div class="action-buttons">
+            <a href="deposit.html" class="btn btn-deposit"><i class="fas fa-money-bill-wave"></i> Deposit</a>
+            <a href="withdraw.html" class="btn btn-withdraw"><i class="fas fa-hand-holding-usd"></i> Withdraw</a>
+            <a href="mine.html" class="btn btn-mine"><i class="fas fa-coins"></i> Mine</a>
+            <a href="history.html" class="btn btn-history"><i class="fas fa-history"></i> History</a>
+            <a href="reward.html" class="btn btn-reward"><i class="fas fa-gift"></i> Reward</a>
+            <a href="login.html" class="btn btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="register.html" class="btn btn-register"><i class="fas fa-user-plus"></i> Register</a>
+        </div>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Start Investing in GHS</h2>
+        <p>Convert to USDT (BEP20) and grow your wealth with our flexible plans.</p>
+        <a href="#plans" class="btn btn-warning btn-lg"><i class="fas fa-eye"></i> View Plans</a>
+    </section>
+    <!-- Balance Section -->
+    <div class="balance-section">
+        <h3>Your Balance: <span id="userBalance">0 GHS</span></h3>
+    </div>
+    <!-- Investment Plans -->
+    <section class="plans-section" id="plans">
+        <h2 class="text-center mb-4"><i class="fas fa-box-open"></i> Investment Plans (GHS)</h2>
+        <div class="container">
+            <div class="row">
+                <!-- VIP1 Plan -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan-card">
+                        <h3><i class="fas fa-crown"></i> VIP1</h3>
+                        <div class="plan-price">50 GHS</div>
+                        <div class="plan-income">Daily: 5 GHS | Monthly: 166 GHS | Annual: 2001 GHS</div>
+                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP1" data-amount="50">Invest</button>
+                    </div>
+                </div>
+                <!-- VIP2 Plan -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan-card">
+                        <h3><i class="fas fa-gem"></i> VIP2</h3>
+                        <div class="plan-price">150 GHS</div>
+                        <div class="plan-income">Daily: 16 GHS | Monthly: 500 GHS | Annual: 6001 GHS</div>
+                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP2" data-amount="150">Invest</button>
+                    </div>
+                </div>
+                <!-- VIP3 Plan -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan-card">
+                        <h3><i class="fas fa-diamond"></i> VIP3</h3>
+                        <div class="plan-price">400 GHS</div>
+                        <div class="plan-income">Daily: 44 GHS | Monthly: 1333 GHS | Annual: 15998 GHS</div>
+                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP3" data-amount="400">Invest</button>
+                    </div>
+                </div>
+                <!-- VIP4 Plan -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan-card">
+                        <h3><i class="fas fa-trophy"></i> VIP4</h3>
+                        <div class="plan-price">800 GHS</div>
+                        <div class="plan-income">Daily: 88 GHS | Monthly: 2666 GHS | Annual: 32000 GHS</div>
+                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP4" data-amount="800">Invest</button>
+                    </div>
+                </div>
+                <!-- VIP5 Plan -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan-card">
+                        <h3><i class="fas fa-award"></i> VIP5</h3>
+                        <div class="plan-price">1500 GHS</div>
+                        <div class="plan-income">Daily: 187 GHS | Monthly: 5625 GHS | Annual: 67500 GHS</div>
+                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP5" data-amount="1500">Invest</button>
+                    </div>
+                </div>
+                <!-- VIP6 Plan -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan-card">
+                        <h3><i class="fas fa-medal"></i> VIP6</h3>
+                        <div class="plan-price">3000 GHS</div>
+                        <div class="plan-income">Daily: 375 GHS | Monthly: 11250 GHS | Annual: 135000 GHS</div>
+                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP6" data-amount="3000">Invest</button>
+                    </div>
+                </div>
+                <!-- VIP7 Plan -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan-card">
+                        <h3><i class="fas fa-certificate"></i> VIP7</h3>
+                        <div class="plan-price">5000 GHS</div>
+                        <div class="plan-income">Daily: 625 GHS | Monthly: 18750 GHS | Annual: 225000 GHS</div>
+                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP7" data-amount="5000">Invest</button>
+                    </div>
+                </div>
+                <!-- VIP8 Plan -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="plan-card">
+                        <h3><i class="fas fa-chess-king"></i> VIP8</h3>
+                        <div class="plan-price">10000 GHS</div>
+                        <div class="plan-income">Daily: 1428 GHS | Monthly: 42857 GHS | Annual: 514285 GHS</div>
+                        <button class="invest-btn" data-bs-toggle="modal" data-bs-target="#investModal" data-plan="VIP8" data-amount="10000">Invest</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Invest Modal -->
+    <div class="modal fade" id="investModal" tabindex="-1" aria-labelledby="investModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="investModalLabel">Investment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Plan:</strong> <span id="modalPlan"></span></p>
+                    <p><strong>Amount:</strong> <span id="modalAmount"></span> GHS</p>
+                    <p><strong>Daily Income:</strong> <span id="modalDaily"></span> GHS</p>
+                    <p><strong>Monthly Income:</strong> <span id="modalMonthly"></span> GHS</p>
+                    <p><strong>Annual Income:</strong> <span id="modalAnnual"></span> GHS</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="confirmInvest">Invest Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Investment Platform. All rights reserved.</p>
+    </footer>
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fetch user balance on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('index.php?action=getBalance')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('userBalance').textContent = `${data.balance} GHS`;
+                });
+        });
+
+        // Modal Logic
+        const investModal = document.getElementById('investModal');
+        investModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget;
+            const plan = button.getAttribute('data-plan');
+            const amount = button.getAttribute('data-amount');
+            const modalPlan = investModal.querySelector('#modalPlan');
+            const modalAmount = investModal.querySelector('#modalAmount');
+            const modalDaily = investModal.querySelector('#modalDaily');
+            const modalMonthly = investModal.querySelector('#modalMonthly');
+            const modalAnnual = investModal.querySelector('#modalAnnual');
+            // Set modal content
+            modalPlan.textContent = plan;
+            modalAmount.textContent = amount;
+            // Calculate incomes (simplified logic)
+            let daily, monthly, annual;
+            switch (plan) {
+                case 'VIP1':
+                    daily = 5; monthly = 166; annual = 2001;
+                    break;
+                case 'VIP2':
+                    daily = 16; monthly = 500; annual = 6001;
+                    break;
+                case 'VIP3':
+                    daily = 44; monthly = 1333; annual = 15998;
+                    break;
+                case 'VIP4':
+                    daily = 88; monthly = 2666; annual = 32000;
+                    break;
+                case 'VIP5':
+                    daily = 187; monthly = 5625; annual = 67500;
+                    break;
+                case 'VIP6':
+                    daily = 375; monthly = 11250; annual = 135000;
+                    break;
+                case 'VIP7':
+                    daily = 625; monthly = 18750; annual = 225000;
+                    break;
+                case 'VIP8':
+                    daily = 1428; monthly = 42857; annual = 514285;
+                    break;
+                default:
+                    daily = 0; monthly = 0; annual = 0;
+            }
+            modalDaily.textContent = daily;
+            modalMonthly.textContent = monthly;
+            modalAnnual.textContent = annual;
+        });
+
+        // Confirm Invest
+        document.getElementById('confirmInvest').addEventListener('click', () => {
+            const plan = document.getElementById('modalPlan').textContent;
+            const amount = parseInt(document.getElementById('modalAmount').textContent);
+            fetch('index.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=invest&plan=${plan}&amount=${amount}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Successfully invested in ${plan} plan! Redirecting to packs page...`);
+                    window.location.href = `packs.html?plan=${plan}&amount=${amount}`;
+                } else {
+                    alert(data.message || 'Investment failed!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
